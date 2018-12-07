@@ -11,7 +11,9 @@ const StyledApp = styled.div`
 
 class App extends Component {
   state = {
-    notifications: [],
+    notifications: [],		
+    searchTerm: '',
+		isActive: false
   }
 
   initialData = [];
