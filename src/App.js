@@ -9,10 +9,18 @@ const StyledApp = styled.div`
 
 class App extends Component {
   getNotifications = async () => {
+    state = {
+      notifications: [],
+    }
+  
+    initialData = [];
+
 		const response = await window.fetch('http://localhost:3004/getNotifications');
     const data = await response.json();
     
     console.log(data);
+    this.initialData = data;
+		this.setState({ notifications: data.notifications });
   }
   
   componentDidMount() {
