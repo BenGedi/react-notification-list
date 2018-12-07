@@ -35,7 +35,7 @@ const StyledNotification = styled.div`
     }
 `
 
-const notification = props => 
+const notificationItem = props => 
     <StyledNotification color={props.color} >
         <div className="notification">
             <header>{props.date}</header>
@@ -43,4 +43,4 @@ const notification = props =>
         </div>
     </StyledNotification>
 
-export default notification;
+export default notificationItem;

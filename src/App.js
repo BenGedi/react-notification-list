@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import NotificationList from './components/notification-list/notification-list';
+import Controllers from './components/controllers/controllers';
 
 const StyledApp = styled.div`
   display: flex;
@@ -30,6 +31,14 @@ class App extends Component {
   render() {
     return (
       <StyledApp>
+        <header>
+					<h1>Notifications</h1>
+				</header>
+
+        <Controllers
+					filter={() => {}}
+					toggleActive={() => {}} />
+
         <NotificationList {...this.state} />
       </StyledApp>
     );
