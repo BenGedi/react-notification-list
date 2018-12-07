@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import NotificationList from './components/notification-list/notification-list';
 
 const StyledApp = styled.div`
   display: flex;
@@ -8,19 +9,17 @@ const StyledApp = styled.div`
 `
 
 class App extends Component {
-  getNotifications = async () => {
-    state = {
-      notifications: [],
-    }
-  
-    initialData = [];
+  state = {
+    notifications: [],
+  }
 
-		const response = await window.fetch('http://localhost:3004/getNotifications');
+  initialData = [];
+  getNotifications = async () => {
+    const response = await window.fetch('http://localhost:3004/getNotifications');
     const data = await response.json();
-    
-    console.log(data);
+
     this.initialData = data;
-		this.setState({ notifications: data.notifications });
+    this.setState({ notifications: data.notifications });
   }
   
   componentDidMount() {
@@ -31,7 +30,7 @@ class App extends Component {
   render() {
     return (
       <StyledApp>
-        ben
+        <NotificationList {...this.state} />
       </StyledApp>
     );
   }
