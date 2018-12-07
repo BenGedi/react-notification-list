@@ -7,6 +7,7 @@ const StyledNotification = styled.div`
     display: flex;
     position: relative;
     margin-bottom: 10px;
+    overflow: hidden;
     box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.35);
     transition: all .2s ease-in-out;
 
