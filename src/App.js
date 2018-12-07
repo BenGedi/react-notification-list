@@ -17,6 +17,7 @@ class App extends Component {
   }
 
   initialData = [];
+  
   getNotifications = async () => {
     const response = await window.fetch('http://localhost:3004/getNotifications');
     const data = await response.json();
