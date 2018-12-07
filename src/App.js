@@ -22,6 +22,36 @@ class App extends Component {
     this.initialData = data;
     this.setState({ notifications: data.notifications });
   }
+
+  getFilteredNotifications = (notifications, isActive, searchTerm) => (
+		notifications.filter(item => {
+			const info = item.information.toLowerCase();
+
+			return isActive ? item.active && info.includes(searchTerm) : info.includes(searchTerm);
+		})
+	)
+
+	getRelevantNotifications = isActive => (
+		isActive ? this.state.notifications : this.initialData.notifications
+	);
+
+	filterSearchByInformation = (searchTerm) => {
+		const term = searchTerm.toLowerCase();
+		const isActive = this.state.isActive;
+		const notificationState = this.getRelevantNotifications(isActive);
+		const notifications = this.getFilteredNotifications(notificationState, isActive, term);
+
+		this.setState({ notifications, searchTerm });
+	}
+
+	toggleActiveNotifications = (e) => {
+		const isActive = e.target.checked;
+		const searchTerm = this.state.searchTerm;
+		const notificationState = this.getRelevantNotifications(isActive);
+		const notifications = this.getFilteredNotifications(notificationState, isActive, searchTerm);
+
+		this.setState({ notifications, isActive })
+	}
   
   componentDidMount() {
 		this.getNotifications();
@@ -36,8 +66,8 @@ class App extends Component {
 				</header>
 
         <Controllers
-					filter={() => {}}
-					toggleActive={() => {}} />
+					filter={this.filterSearchByInformation}
+					toggleActive={(e) => this.toggleActiveNotifications(e)} />
 
         <NotificationList {...this.state} />
       </StyledApp>
