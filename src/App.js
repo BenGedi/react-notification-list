@@ -70,6 +70,10 @@ class App extends Component {
 					toggleActive={(e) => this.toggleActiveNotifications(e)} />
 
         <NotificationList {...this.state} />
+
+        { this.state.notifications.length === 0 &&
+					<div>No notification found! <span>¯\(º o)/¯</span></div>
+				}
       </StyledApp>
     );
   }
