@@ -34,14 +34,18 @@ class App extends Component {
 		})
 	)
 
-	getRelevantNotifications = isActive => (
-		isActive ? this.state.notifications : this.initialData.notifications
-	);
+	getRelevantNotifications = (isActive, searchTerm) => {
+		if (isActive && searchTerm === '') {
+			return this.initialData.notifications;
+		} 
+
+		return isActive ? this.state.notifications : this.initialData.notifications;
+	};
 
 	filterSearchByInformation = (searchTerm) => {
 		const term = searchTerm.toLowerCase();
 		const isActive = this.state.isActive;
-		const notificationState = this.getRelevantNotifications(isActive);
+		const notificationState = this.getRelevantNotifications(isActive, term);
 		const notifications = this.getFilteredNotifications(notificationState, isActive, term);
 
 		this.setState({ notifications, searchTerm });
@@ -72,7 +76,7 @@ class App extends Component {
 					filter={this.filterSearchByInformation}
 					toggleActive={(e) => this.toggleActiveNotifications(e)} />
 
-        <NotificationList {...this.state} />
+        <NotificationList notifications={this.state.notifications} />
 
         { this.state.notifications.length === 0 &&
 					<div>No notification found! <span>¯\(º o)/¯</span></div>
