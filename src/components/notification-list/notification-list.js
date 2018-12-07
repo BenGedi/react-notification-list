@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import NotificationItem from './notification-item/notification-item'
 
 const StyledNotificationList = styled.div`
     .notification-item {
@@ -10,7 +11,7 @@ const StyledNotificationList = styled.div`
 const notificationList = ({notifications}) => (
     <StyledNotificationList>
         { notifications.map((item, i) => (
-                    <div key={i}>{item.information}</div>
+                    <NotificationItem key={i} {...item}/>
                 )
             )
         }
